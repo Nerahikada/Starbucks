@@ -4,6 +4,7 @@
     "type": "library",
     "require": {
         "php": ">=8.2",
+        "ext-ctype": "*",
         "guzzlehttp/guzzle": "^7.5"
     },
     "require-dev": {
