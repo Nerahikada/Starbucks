@@ -32,7 +32,6 @@ final readonly class ShoppingCart
             RequestOptions::HEADERS => [
                 'User-Agent' => Constants::USER_AGENT,
             ],
-            RequestOptions::HTTP_ERRORS => false,
         ]);
 
         $this->client->get('https://cart.starbucks.co.jp/');
@@ -75,7 +74,8 @@ final readonly class ShoppingCart
     public function addProduct(Product $product, int $amount = 1): bool
     {
         $response = $this->client->post('https://menu.starbucks.co.jp/api/items/cart', [
-            RequestOptions::JSON => ['jan_code' => $product->sku, 'quantity' => $amount]
+            RequestOptions::JSON => ['jan_code' => $product->sku, 'quantity' => $amount],
+            RequestOptions::HTTP_ERRORS => false,
         ]);
         $data = json_decode($response->getBody()->getContents(), true, flags: JSON_THROW_ON_ERROR);
         //var_dump($data);
